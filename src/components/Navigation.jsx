@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -7,6 +7,9 @@ import {
   Avatar,
   Button,
   IconButton,
+  InputGroup,
+  Input,
+  InputRightElement,
   Menu,
   MenuButton,
   MenuList,
@@ -19,6 +22,7 @@ import {
   useColorMode,
   Center,
 } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { TbBooks } from "react-icons/tb";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -28,6 +32,7 @@ import { getUser } from "../utils";
 
 const Navigation = () => {
   const { user, setUser } = useContext(Context);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,18 +56,22 @@ const Navigation = () => {
     }
   }, [token, navigate, setUser]);
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   const links = [
     {
       text: "Libros",
-      href: "/libros",
+      href: "/books",
     },
     {
       text: "Buscar",
-      href: "/buscar",
+      href: "/search",
     },
     {
       text: "Comunidad",
-      href: "/comunidad",
+      href: "/community",
     },
   ];
 
@@ -77,9 +86,10 @@ const Navigation = () => {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
+
           <HStack spacing={10}>
             <NavLink href="/" id="logo">
-              <TbBooks fontSize="30" /> ReadConnect
+              <TbBooks fontSize="26" /> ReadConnect
             </NavLink>
             <HStack display={{ base: "none", md: "flex" }}>
               {links.map((link, index) => {
@@ -94,6 +104,23 @@ const Navigation = () => {
 
           <Flex alignItems={"center"}>
             <HStack spacing={7}>
+              <InputGroup>
+                <Input
+                  name="search"
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder="Buscar libros"
+                />
+                <InputRightElement
+                  cursor="pointer"
+                  onClick={() => {
+                    console.log(search);
+                  }}
+                >
+                  <Search2Icon color="green.500" />
+                </InputRightElement>
+              </InputGroup>
+
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
