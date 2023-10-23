@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input } from "@chakra-ui/react";
 import Context from "../Context";
 
 function Login() {
@@ -37,14 +38,16 @@ function Login() {
 
   return (
     <div className="login">
-      <input
+      <Input
+        variant="flushed"
         name="email"
         type="text"
         value={formState.email}
         onChange={handleInputChange}
         required
       />
-      <input
+      <Input
+        variant="flushed"
         name="password"
         type="password"
         value={formState.password}

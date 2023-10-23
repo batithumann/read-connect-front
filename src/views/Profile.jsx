@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
+import Loading from "../components/Loading";
 import Context from "../Context";
 
 function Profile() {
@@ -18,20 +18,19 @@ function Profile() {
   return (
     <div>
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : user ? (
         <div>
           <h1>{user.name}</h1>
           <p>{user.email}</p>
           {user.user_books
             ? user.user_books.map((book) => {
-                console.log(book);
                 return <li key={book.id}>{book.title}</li>;
               })
             : ""}
         </div>
       ) : (
-        "no hay usuario"
+        "Ocurrió un error"
       )}
     </div>
   );
