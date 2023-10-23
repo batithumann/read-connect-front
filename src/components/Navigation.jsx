@@ -104,7 +104,7 @@ const Navigation = () => {
 
           <Flex alignItems={"center"}>
             <HStack spacing={7}>
-              <InputGroup>
+              <InputGroup display={{ base: "none", md: "flex" }}>
                 <Input
                   name="search"
                   value={search}
@@ -174,6 +174,22 @@ const Navigation = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
+              <InputGroup>
+                <Input
+                  name="search"
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder="Buscar libros"
+                />
+                <InputRightElement
+                  cursor="pointer"
+                  onClick={() => {
+                    console.log(search);
+                  }}
+                >
+                  <Search2Icon color="green.500" />
+                </InputRightElement>
+              </InputGroup>
               {links.map((link, index) => {
                 return (
                   <NavLink key={index} href={link.href}>
