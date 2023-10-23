@@ -1,26 +1,28 @@
 import "./App.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 
+import Navigation from "./components/Navigation";
 import Context from "./Context";
 import Home from "./views/Home";
+import Profile from "./views/Profile";
+import Login from "./views/Login";
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
-  useEffect(() => {
-    const data = localStorage.getItem("email");
-    if (data) setUsuario({ email: data });
-  }, []);
+  const [user, setUser] = useState(null);
 
   return (
-    <ChakraProvider>
-      <Context.Provider value={{ usuario, setUsuario }}>
+    <ChakraProvider theme={theme}>
+      <Context.Provider value={{ user, setUser }}>
         <BrowserRouter>
+          <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
 
             <Route path="*" element={<Home />} />
           </Routes>
