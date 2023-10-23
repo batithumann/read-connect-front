@@ -10,6 +10,7 @@ import Context from "./Context";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Login from "./views/Login";
+import Books from "./views/Books";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/books" element={<Books />} />
 
             <Route path="*" element={<Home />} />
           </Routes>

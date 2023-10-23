@@ -11,3 +11,13 @@ export const getUser = async (token) => {
     throw error;
   }
 };
+
+export const getBooks = async () => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = "/books";
+    return await axios.get(urlServer + endpoint);
+  } catch (error) {
+    throw error;
+  }
+};
