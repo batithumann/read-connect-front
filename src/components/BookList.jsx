@@ -4,16 +4,16 @@ import Loading from "./Loading";
 import { getBooks } from "../utils";
 import BookCard from "./BookCard";
 
-const BookList = () => {
+const BookList = ({ search }) => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBooks()
+    getBooks(search)
       .then((response) => {
         setBooks(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [search]);
 
   return (
     <div>

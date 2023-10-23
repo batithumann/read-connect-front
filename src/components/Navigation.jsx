@@ -32,7 +32,7 @@ import { getUser } from "../utils";
 
 const Navigation = () => {
   const { user, setUser } = useContext(Context);
-  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,7 +57,11 @@ const Navigation = () => {
   }, [token, navigate, setUser]);
 
   const handleSearchChange = (e) => {
-    setSearch(e.target.value);
+    setSearchInput(e.target.value);
+  };
+
+  const search = () => {
+    navigate(`/books?search=${searchInput}`);
   };
 
   const links = [
@@ -107,16 +111,11 @@ const Navigation = () => {
               <InputGroup display={{ base: "none", md: "flex" }}>
                 <Input
                   name="search"
-                  value={search}
+                  value={searchInput}
                   onChange={handleSearchChange}
                   placeholder="Buscar libros"
                 />
-                <InputRightElement
-                  cursor="pointer"
-                  onClick={() => {
-                    console.log(search);
-                  }}
-                >
+                <InputRightElement cursor="pointer" onClick={search}>
                   <Search2Icon color="green.500" />
                 </InputRightElement>
               </InputGroup>
@@ -177,16 +176,11 @@ const Navigation = () => {
               <InputGroup>
                 <Input
                   name="search"
-                  value={search}
+                  value={searchInput}
                   onChange={handleSearchChange}
                   placeholder="Buscar libros"
                 />
-                <InputRightElement
-                  cursor="pointer"
-                  onClick={() => {
-                    console.log(search);
-                  }}
-                >
+                <InputRightElement cursor="pointer" onClick={search}>
                   <Search2Icon color="green.500" />
                 </InputRightElement>
               </InputGroup>

@@ -12,10 +12,11 @@ export const getUser = async (token) => {
   }
 };
 
-export const getBooks = async () => {
+export const getBooks = async (search) => {
   try {
     const urlServer = process.env.REACT_APP_BACKEND_URL;
-    const endpoint = "/books";
+    let endpoint = "/books";
+    if (search) endpoint += `?search=${search}`;
     return await axios.get(urlServer + endpoint);
   } catch (error) {
     throw error;

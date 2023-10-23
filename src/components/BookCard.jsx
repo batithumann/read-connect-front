@@ -12,7 +12,6 @@ import {
 import { StarIcon } from "@chakra-ui/icons";
 
 const BookCard = ({ book }) => {
-  console.log(book);
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -35,9 +34,10 @@ const BookCard = ({ book }) => {
           <Heading size="md">
             {book.title}
             {Array.isArray(book.author) ? (
-              book.author.map((author) => {
+              book.author.map((author, index) => {
                 return (
                   <Box
+                    key={index}
                     color="gray.500"
                     fontWeight="semibold"
                     letterSpacing="wide"
