@@ -113,7 +113,7 @@ const Navigation = () => {
                   name="search"
                   value={searchInput}
                   onChange={handleSearchChange}
-                  placeholder="Buscar libros"
+                  placeholder="Búsqueda rápida"
                 />
                 <InputRightElement cursor="pointer" onClick={search}>
                   <Search2Icon color="green.500" />
@@ -178,7 +178,7 @@ const Navigation = () => {
                   name="search"
                   value={searchInput}
                   onChange={handleSearchChange}
-                  placeholder="Buscar libros"
+                  placeholder="Búsqueda rápida"
                 />
                 <InputRightElement cursor="pointer" onClick={search}>
                   <Search2Icon color="green.500" />

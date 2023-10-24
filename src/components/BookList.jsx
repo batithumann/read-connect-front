@@ -1,19 +1,26 @@
 import { Suspense, useState, useEffect } from "react";
 import { Container } from "@chakra-ui/react";
 import Loading from "./Loading";
-import { getBooks } from "../utils";
+import { getBooks, getBooksAdvanced } from "../utils";
 import BookCard from "./BookCard";
 
-const BookList = ({ search }) => {
+const BookList = ({ search, filters, advanced }) => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBooks(search)
-      .then((response) => {
-        setBooks(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, [search]);
+    if (advanced) {
+      getBooksAdvanced(filters)
+        .then((response) => {
+          setBooks(response.data);
+        })
+        .catch((error) => console.log(error));
+    } else
+      getBooks(search)
+        .then((response) => {
+          setBooks(response.data);
+        })
+        .catch((error) => console.log(error));
+  }, [search, filters, advanced]);
 
   return (
     <div>

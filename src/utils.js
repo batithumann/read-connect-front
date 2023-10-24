@@ -22,3 +22,27 @@ export const getBooks = async (search) => {
     throw error;
   }
 };
+
+export const getBooksAdvanced = async (params) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    let filters = [];
+    Object.entries(params).forEach(([key, value]) => {
+      if (value && value !== "") filters.push(`${key}=${value}`);
+    });
+    const endpoint = `/search?${filters.join("&")}`;
+    return await axios.get(urlServer + endpoint);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMinMaxPages = async () => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = "/number_of_pages";
+    return await axios.get(urlServer + endpoint);
+  } catch (error) {
+    throw error;
+  }
+};

@@ -11,6 +11,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Login from "./views/Login";
 import Books from "./views/Books";
+import Search from "./views/Search";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +26,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<Books />} />
+            <Route path="/books/search" element={<Books advanced={true} />} />
+            <Route path="/search" element={<Search />} />
 
             <Route path="*" element={<Home />} />
           </Routes>
