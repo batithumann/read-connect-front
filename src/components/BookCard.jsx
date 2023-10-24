@@ -6,14 +6,13 @@ import {
   Heading,
   Text,
   CardFooter,
-  Button,
   Flex,
   Image,
 } from "@chakra-ui/react";
+import moment from "moment";
 import { StarIcon } from "@chakra-ui/icons";
 
 const BookCard = ({ book }) => {
-  console.log(book);
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -35,13 +34,28 @@ const BookCard = ({ book }) => {
 
       <Stack w="100%">
         <CardBody w="100%">
-          <Heading size="md">
-            {book.title}
-            {Array.isArray(book.author) ? (
-              book.author.map((author, index) => {
-                return (
+          <Heading size="md" w="100%">
+            <Flex w="100%" justifyContent="space-between">
+              <Box>
+                {book.title}
+                {Array.isArray(book.author) ? (
+                  book.author.map((author, index) => {
+                    return (
+                      <Box
+                        key={index}
+                        color="gray.500"
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        ml="2"
+                      >
+                        {author}
+                      </Box>
+                    );
+                  })
+                ) : (
                   <Box
-                    key={index}
                     color="gray.500"
                     fontWeight="semibold"
                     letterSpacing="wide"
@@ -49,12 +63,13 @@ const BookCard = ({ book }) => {
                     textTransform="uppercase"
                     ml="2"
                   >
-                    {author}
+                    {[book.author]}
                   </Box>
-                );
-              })
-            ) : (
+                )}
+              </Box>
               <Box
+                textAlign="right"
+                minW="90px"
                 color="gray.500"
                 fontWeight="semibold"
                 letterSpacing="wide"
@@ -62,9 +77,15 @@ const BookCard = ({ book }) => {
                 textTransform="uppercase"
                 ml="2"
               >
-                {[book.author]}
+                {book.published_date &&
+                  // moment(Date(book.published_date)).format("ll")
+                  new Date(book.published_date).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
               </Box>
-            )}
+            </Flex>
           </Heading>
 
           <Text py="2">{book.short_description}</Text>
