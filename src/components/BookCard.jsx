@@ -37,34 +37,21 @@ const BookCard = ({ book }) => {
             <Flex w="100%" justifyContent="space-between">
               <Box>
                 {book.title}
-                {Array.isArray(book.author) ? (
-                  book.author.map((author, index) => {
-                    return (
-                      <Box
-                        key={index}
-                        color="gray.500"
-                        fontWeight="semibold"
-                        letterSpacing="wide"
-                        fontSize="xs"
-                        textTransform="uppercase"
-                        ml="2"
-                      >
-                        {author}
-                      </Box>
-                    );
-                  })
-                ) : (
-                  <Box
-                    color="gray.500"
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    ml="2"
-                  >
-                    {[book.author]}
-                  </Box>
-                )}
+                {book.authors.map((author, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      color="gray.500"
+                      fontWeight="semibold"
+                      letterSpacing="wide"
+                      fontSize="xs"
+                      textTransform="uppercase"
+                      ml="2"
+                    >
+                      {author.name}
+                    </Box>
+                  );
+                })}
               </Box>
               <Box
                 textAlign="right"
@@ -88,6 +75,21 @@ const BookCard = ({ book }) => {
           </Heading>
 
           <Text py="2">{book.short_description}</Text>
+          {book.categories.map((category, index) => {
+            return (
+              <Box
+                key={index}
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                ml="2"
+              >
+                {category.name}
+              </Box>
+            );
+          })}
         </CardBody>
 
         <CardFooter>
