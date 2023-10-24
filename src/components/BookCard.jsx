@@ -7,11 +7,13 @@ import {
   Text,
   CardFooter,
   Button,
+  Flex,
   Image,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
 const BookCard = ({ book }) => {
+  console.log(book);
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -20,7 +22,9 @@ const BookCard = ({ book }) => {
       my={10}
     >
       <Image
-        objectFit="cover"
+        objectFit="contain"
+        objectPosition="top"
+        minW="160px"
         maxW="160px"
         src={
           book.thumbnail_url ||
@@ -29,8 +33,8 @@ const BookCard = ({ book }) => {
         alt={book.title}
       />
 
-      <Stack>
-        <CardBody>
+      <Stack w="100%">
+        <CardBody w="100%">
           <Heading size="md">
             {book.title}
             {Array.isArray(book.author) ? (
@@ -67,19 +71,22 @@ const BookCard = ({ book }) => {
         </CardBody>
 
         <CardFooter>
-          <Box display="flex" mt="2" alignItems="center">
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i < book.rating ? "teal.500" : "gray.300"}
-                />
-              ))}
-            <Box as="span" ml="2" color="gray.600" fontSize="sm">
-              {book.reviewCount || 0} reviews
+          <Flex w="100%" justifyContent="space-between">
+            <Box display="flex" mt="2" alignItems="center">
+              {Array(5)
+                .fill("")
+                .map((_, i) => (
+                  <StarIcon
+                    key={i}
+                    color={i < book.rating ? "teal.500" : "gray.300"}
+                  />
+                ))}
+              <Box as="span" ml="2" color="gray.600" fontSize="sm">
+                {book.reviewCount || 0} reviews
+              </Box>
             </Box>
-          </Box>
+            <Box>{book.page_count} páginas</Box>
+          </Flex>
         </CardFooter>
       </Stack>
     </Card>
