@@ -4,8 +4,7 @@ import Loading from "../components/Loading";
 import Context from "../Context";
 
 function Profile() {
-  const { user, setUser } = useContext(Context);
-  const [loading, setLoading] = useState(false);
+  const { user } = useContext(Context);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -17,9 +16,7 @@ function Profile() {
 
   return (
     <div>
-      {loading ? (
-        <Loading />
-      ) : user ? (
+      {user && (
         <div>
           <h1>{user.name}</h1>
           <p>{user.email}</p>
@@ -29,8 +26,6 @@ function Profile() {
               })
             : ""}
         </div>
-      ) : (
-        "Ocurrió un error"
       )}
     </div>
   );

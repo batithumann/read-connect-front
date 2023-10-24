@@ -1,4 +1,4 @@
-import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import { Flex, useColorModeValue } from "@chakra-ui/react";
 
 const NavLink = (props) => {
   const { children } = props;

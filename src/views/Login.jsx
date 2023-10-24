@@ -1,13 +1,11 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
-import Context from "../Context";
 
 function Login() {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const { user, setUser } = useContext(Context);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

@@ -9,7 +9,6 @@ import {
   Flex,
   Image,
 } from "@chakra-ui/react";
-import moment from "moment";
 import { StarIcon } from "@chakra-ui/icons";
 
 const BookCard = ({ book }) => {

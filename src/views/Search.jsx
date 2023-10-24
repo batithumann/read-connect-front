@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [minMax, setMinMax] = useState([,]);
+  const [minMax, setMinMax] = useState([0, 1000]);
   const [textInputs, setTextInputs] = useState({
     title: "",
     author: "",
@@ -109,7 +109,6 @@ const Search = () => {
           <FormControl>
             <FormLabel mb={10}>Páginas</FormLabel>
             <RangeSlider
-              aria-label={["min", "max"]}
               onChange={(val) => setPageCount(val)}
               defaultValue={[pageCount[0], pageCount[1]]}
               min={minMax[0]}
