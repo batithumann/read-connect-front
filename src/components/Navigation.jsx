@@ -110,6 +110,9 @@ const Navigation = () => {
             <HStack spacing={7}>
               <InputGroup display={{ base: "none", md: "flex" }}>
                 <Input
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") search();
+                  }}
                   name="search"
                   value={searchInput}
                   onChange={handleSearchChange}

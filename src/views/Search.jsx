@@ -78,6 +78,9 @@ const Search = () => {
               name="title"
               value={textInputs.title}
               onChange={handleTextInputchange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSubmit();
+              }}
             />
           </FormControl>
 
@@ -90,6 +93,9 @@ const Search = () => {
                   name="author"
                   value={textInputs.author}
                   onChange={handleTextInputchange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSubmit();
+                  }}
                 />
               </FormControl>
             </GridItem>
@@ -101,6 +107,9 @@ const Search = () => {
                   name="category"
                   value={textInputs.category}
                   onChange={handleTextInputchange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSubmit();
+                  }}
                 />
               </FormControl>
             </GridItem>
