@@ -8,6 +8,7 @@ import {
   CardFooter,
   Flex,
   Image,
+  Badge,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
@@ -37,6 +38,18 @@ const BookCard = ({ book }) => {
             <Flex w="100%" justifyContent="space-between">
               <Box>
                 {book.title}
+                {book.categories.map((category, index) => {
+                  return (
+                    <Badge
+                      key={index}
+                      ml="2"
+                      variant="solid"
+                      colorScheme="purple"
+                    >
+                      {category.name}
+                    </Badge>
+                  );
+                })}
                 {book.authors.map((author, index) => {
                   return (
                     <Box
@@ -75,21 +88,6 @@ const BookCard = ({ book }) => {
           </Heading>
 
           <Text py="2">{book.short_description}</Text>
-          {book.categories.map((category, index) => {
-            return (
-              <Box
-                key={index}
-                color="gray.500"
-                fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="xs"
-                textTransform="uppercase"
-                ml="2"
-              >
-                {category.name}
-              </Box>
-            );
-          })}
         </CardBody>
 
         <CardFooter>
