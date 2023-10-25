@@ -83,7 +83,7 @@ const Navigation = () => {
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-        <Container minW={"container.sm"} maxW={"container.xl"}>
+        <Container maxW={"container.xl"}>
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
             <IconButton
               size={"md"}
