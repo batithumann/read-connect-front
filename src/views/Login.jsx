@@ -55,7 +55,7 @@ function Login() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} minW={"lg"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} minW={"md"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Entra a tu cuenta</Heading>
         </Stack>
@@ -98,8 +98,12 @@ function Login() {
                 Entrar
               </Button>
               <Flex justifyContent="center">
-                <Text mr="2">¿No tienes cuenta?</Text>
-                <Link color={"blue.400"}>Regístrate</Link>
+                <Text mr="2">
+                  ¿No tienes cuenta?{" "}
+                  <Link href="/register" color={"blue.400"}>
+                    Regístrate
+                  </Link>
+                </Text>
               </Flex>
             </Stack>
           </Stack>
