@@ -129,51 +129,57 @@ const Navigation = () => {
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                 </Button>
 
-                <Menu>
-                  <MenuButton
-                    as={Button}
-                    rounded={"full"}
-                    variant={"link"}
-                    cursor={"pointer"}
-                    minW={0}
-                  >
-                    <Avatar
-                      size={"sm"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
-                  </MenuButton>
-                  <MenuList alignItems={"center"}>
-                    <br />
-                    <Center>
+                {user ? (
+                  <Menu>
+                    <MenuButton
+                      as={Button}
+                      rounded={"full"}
+                      variant={"link"}
+                      cursor={"pointer"}
+                      minW={0}
+                    >
                       <Avatar
-                        size={"2xl"}
+                        size={"sm"}
                         src={
                           "https://avatars.dicebear.com/api/male/username.svg"
                         }
                       />
-                    </Center>
-                    <br />
-                    <Center>
-                      <p>{user ? user.name : <a href="/login">Login</a>}</p>
-                    </Center>
-                    <br />
-                    {user ? (
-                      <>
-                        <MenuDivider />
-                        <MenuItem onClick={() => navigate("/profile")}>
-                          Mis datos
-                        </MenuItem>
-                        <MenuItem onClick={() => navigate("/my_books")}>
-                          Mis Libros
-                        </MenuItem>
-                        <MenuDivider />
-                        <MenuItem onClick={logout}>Salir</MenuItem>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </MenuList>
-                </Menu>
+                    </MenuButton>
+                    <MenuList alignItems={"center"}>
+                      <br />
+                      <Center>
+                        <Avatar
+                          size={"2xl"}
+                          src={
+                            "https://avatars.dicebear.com/api/male/username.svg"
+                          }
+                        />
+                      </Center>
+                      <br />
+                      <Center>
+                        <p>{user.name}</p>
+                      </Center>
+                      <br />
+                      {user ? (
+                        <>
+                          <MenuDivider />
+                          <MenuItem onClick={() => navigate("/profile")}>
+                            Mis datos
+                          </MenuItem>
+                          <MenuItem onClick={() => navigate("/my_books")}>
+                            Mis Libros
+                          </MenuItem>
+                          <MenuDivider />
+                          <MenuItem onClick={logout}>Salir</MenuItem>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </MenuList>
+                  </Menu>
+                ) : (
+                  <NavLink href={"/login"}>Acceder</NavLink>
+                )}
               </HStack>
             </Flex>
           </Flex>
