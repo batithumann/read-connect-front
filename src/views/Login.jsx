@@ -19,6 +19,7 @@ import {
 function Login() {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const [error, setError] = useState({ message: "" });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,6 +45,7 @@ function Login() {
       navigate("/profile");
     } catch (error) {
       console.log(error);
+      setError(error.response.data);
     }
   };
 
@@ -97,6 +99,7 @@ function Login() {
                 >
                   Entrar
                 </Button>
+                <Text color={"red"}>{error.message}</Text>
                 <Flex justifyContent="center">
                   <Text mr="2">
                     ¿No tienes cuenta?{" "}
