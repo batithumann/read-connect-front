@@ -26,20 +26,26 @@ import {
 import { useState, useEffect } from "react";
 import { addUserBookStatus, getUserBookStatus } from "../utils";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 const BookCard = ({ book }) => {
   const [bookAction, setBookAction] = useState("Quiero leerlo");
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [added, setAdded] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const bookActionSubmit = async () => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     const status = bookAction === "Quiero leerlo" ? "wishlist" : "finished";
     try {
       await addUserBookStatus(token, book.id, status);
       setAdded(true);
     } catch (error) {
-      console.log(error);
+      return;
     }
   };
 
@@ -57,10 +63,10 @@ const BookCard = ({ book }) => {
           }
         })
         .catch((error) => {
-          return;
-        })
-        .finally(() => setLoading(false));
+          console.log(error);
+        });
     }
+    setLoading(false);
   }, [token, book]);
 
   return (
