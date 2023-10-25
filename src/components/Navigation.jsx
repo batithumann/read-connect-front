@@ -22,6 +22,7 @@ import {
   useColorMode,
   Center,
   Container,
+  Collapse,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
@@ -36,7 +37,7 @@ const Navigation = () => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
   const token = localStorage.getItem("token");
 
   const logout = () => {
@@ -90,7 +91,7 @@ const Navigation = () => {
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
               aria-label={"Open Menu"}
               display={{ md: "none" }}
-              onClick={isOpen ? onClose : onOpen}
+              onClick={onToggle}
             />
 
             <HStack spacing={10}>
@@ -185,7 +186,7 @@ const Navigation = () => {
           </Flex>
         </Container>
 
-        {isOpen ? (
+        <Collapse in={isOpen} animateOpacity>
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               <InputGroup>
@@ -208,7 +209,7 @@ const Navigation = () => {
               })}
             </Stack>
           </Box>
-        ) : null}
+        </Collapse>
       </Box>
     </>
   );
