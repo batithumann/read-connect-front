@@ -10,6 +10,7 @@ import Context from "./Context";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Login from "./views/Login";
+import Register from "./views/Register";
 import Books from "./views/Books";
 import Search from "./views/Search";
 
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<Books />} />
             <Route path="/books/search" element={<Books advanced={true} />} />

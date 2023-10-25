@@ -46,3 +46,18 @@ export const getMinMaxPages = async () => {
     throw error;
   }
 };
+
+export const signup = async (formState) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = "/signup";
+    const credentials = {
+      name: formState.name,
+      email: formState.email,
+      password: formState.password,
+    };
+    await axios.post(urlServer + endpoint, credentials);
+  } catch (error) {
+    throw error;
+  }
+};
