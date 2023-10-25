@@ -12,6 +12,34 @@ export const getUser = async (token) => {
   }
 };
 
+export const getUserBookStatus = async (token, book_id) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = `/book_status/${book_id}`;
+    return await axios.get(urlServer + endpoint, {
+      headers: { Authorization: "Bearer " + token },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addUserBookStatus = async (token, book_id, status) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = "/add_user_book_status";
+    return await axios.post(
+      urlServer + endpoint,
+      { book_id, status },
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getBooks = async (search) => {
   try {
     const urlServer = process.env.REACT_APP_BACKEND_URL;
