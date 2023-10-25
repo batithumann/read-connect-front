@@ -40,6 +40,16 @@ export const addUserBookStatus = async (token, book_id, status) => {
   }
 };
 
+export const getBookDetailsById = async (book_id) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = `/books/${book_id}`;
+    return await axios.get(urlServer + endpoint);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getBooks = async (search) => {
   try {
     const urlServer = process.env.REACT_APP_BACKEND_URL;

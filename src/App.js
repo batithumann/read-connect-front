@@ -13,6 +13,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Books from "./views/Books";
 import Search from "./views/Search";
+import BookDetails from "./views/BookDetails";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<Books />} />
             <Route path="/books/search" element={<Books advanced={true} />} />
+            <Route path="/books/details/:book_id" element={<BookDetails />} />
             <Route path="/search" element={<Search />} />
 
             <Route path="*" element={<Home />} />

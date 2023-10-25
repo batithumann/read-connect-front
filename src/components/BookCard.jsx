@@ -15,6 +15,7 @@ import {
   MenuList,
   MenuItem,
   MenuButton,
+  Link,
 } from "@chakra-ui/react";
 import {
   CheckIcon,
@@ -73,24 +74,26 @@ const BookCard = ({ book }) => {
         <Loading />
       ) : (
         <>
-          <Image
-            objectFit="contain"
-            objectPosition="top"
-            minW="160px"
-            maxW="160px"
-            src={
-              book.thumbnail_url ||
-              "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg"
-            }
-            alt={book.title}
-          />
+          <Link href={`/books/details/${book.id}`}>
+            <Image
+              objectFit="contain"
+              objectPosition="top"
+              minW="200px"
+              maxW="350px"
+              src={
+                book.thumbnail_url ||
+                "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg"
+              }
+              alt={book.title}
+            />
+          </Link>
 
           <Stack w="100%">
             <CardBody w="100%">
               <Heading size="md" w="100%">
                 <Flex w="100%" justifyContent="space-between">
                   <Box>
-                    {book.title}
+                    <Link href={`/books/details/${book.id}`}>{book.title}</Link>
                     {book.categories.map((category, index) => {
                       return (
                         <Badge
