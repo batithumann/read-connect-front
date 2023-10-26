@@ -30,3 +30,6 @@ Por falta de tiempo no pude completar todos los requisitos de la prueba.
 También me hubiera gustado darle un toque más personal al diseño, y hacer mejoras de UX en general.
 Faltó crear la sección de comunidad donde fuera posible seguir a otros usuarios.
 También faltó el poder escribir reseñas y puntuar libros.
+Tampoco quedé 100% conforme con el código. Creo que con más tiempo podría haberlo optimizado y organizado de mejor manera.
+
+Creo que podría haber simplificado el backend usando Django en vez de Express, pero hace mucho tiempo que no uso Django y me hubiera tomado tiempo volver a aprenderlo.
