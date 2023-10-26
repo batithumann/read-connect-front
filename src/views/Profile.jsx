@@ -8,12 +8,14 @@ import {
   Heading,
   Input,
   Stack,
-  useColorModeValue,
   Avatar,
   AvatarBadge,
   Text,
   IconButton,
   Center,
+  UnorderedList,
+  ListItem,
+  Link,
   Box,
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
@@ -32,6 +34,7 @@ const Profile = () => {
     passwordRepeat: "",
   });
   const [error, setError] = useState({ message: "" });
+  const [loading, setLoading] = useState(true);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -70,6 +73,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (!token) {
       navigate("/login");
     }
@@ -83,171 +87,198 @@ const Profile = () => {
           passwordRepeat: "",
         });
       })
-      .catch((error) => setError(error));
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   }, [token, navigate, edit]);
 
   return (
     <>
-      <Flex
-        minH={"100vh"}
-        align={"top"}
-        justify={"center"}
-        bg={useColorModeValue("gray.50", "gray.800")}
-      >
-        <Stack
-          spacing={4}
-          w={"full"}
-          maxW={"md"}
-          bg={useColorModeValue("white", "gray.700")}
-          rounded={"xl"}
-          boxShadow={"lg"}
-          p={6}
-          my={12}
-        >
-          <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-            {edit ? "Editar perfil" : user ? user.name : <Loading />}
-          </Heading>
-          <FormControl id="userName">
-            <Stack direction={["column", "row"]} spacing={6}>
-              <Center>
-                <Avatar
-                  size="xl"
-                  src="https://avatars.dicebear.com/api/male/username.svg"
-                >
-                  {edit && (
-                    <AvatarBadge
-                      as={IconButton}
-                      size="sm"
-                      rounded="full"
-                      top="-10px"
-                      colorScheme="red"
-                      aria-label="remove Image"
-                      icon={<EditIcon />}
-                    />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Flex minH={"100vh"} align={"top"} justify={"center"}>
+          <Stack
+            spacing={4}
+            w={"full"}
+            maxW={"md"}
+            rounded={"xl"}
+            boxShadow={"lg"}
+            p={6}
+            my={12}
+          >
+            <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+              {edit ? "Editar perfil" : user ? user.name : <Loading />}
+            </Heading>
+            <FormControl id="userName">
+              <Stack direction={["column", "row"]} spacing={6}>
+                <Center>
+                  <Avatar
+                    size="xl"
+                    src="https://avatars.dicebear.com/api/male/username.svg"
+                  >
+                    {edit && (
+                      <AvatarBadge
+                        as={IconButton}
+                        size="sm"
+                        rounded="full"
+                        top="-10px"
+                        colorScheme="red"
+                        aria-label="remove Image"
+                        icon={<EditIcon />}
+                      />
+                    )}
+                  </Avatar>
+                </Center>
+                <Center w="full">
+                  {!edit && (
+                    <Button
+                      w="full"
+                      onClick={() => {
+                        setEdit(true);
+                      }}
+                    >
+                      Editar perfil
+                    </Button>
                   )}
-                </Avatar>
-              </Center>
-              <Center w="full">
-                {!edit && (
+                </Center>
+              </Stack>
+            </FormControl>
+            {edit ? (
+              <>
+                <FormControl id="userName" isRequired>
+                  <FormLabel>Nombre</FormLabel>
+                  <Input
+                    placeholder="Nombre"
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    name="name"
+                    onChange={handleInputChange}
+                    value={formState.name}
+                  />
+                </FormControl>
+                <FormControl id="email" isRequired>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    placeholder="nombre@ejemplo.com"
+                    _placeholder={{ color: "gray.500" }}
+                    type="email"
+                    name="email"
+                    onChange={handleInputChange}
+                    value={formState.email}
+                  />
+                </FormControl>
+                <FormControl id="password" isRequired>
+                  <FormLabel>Contraseña</FormLabel>
+                  <Input
+                    _placeholder={{ color: "gray.500" }}
+                    type="password"
+                    name="password"
+                    onChange={handleInputChange}
+                    value={formState.password}
+                  />
+                </FormControl>
+                <FormControl id="passwordRepeat" isRequired>
+                  <FormLabel>Repite tu contraseña</FormLabel>
+                  <Input
+                    _placeholder={{ color: "gray.500" }}
+                    type="password"
+                    name="passwordRepeat"
+                    onChange={handleInputChange}
+                    value={formState.passwordRepeat}
+                  />
+                </FormControl>
+                <Stack spacing={6} direction={["column", "row"]}>
                   <Button
+                    bg={"red.400"}
+                    color={"white"}
                     w="full"
+                    _hover={{
+                      bg: "red.500",
+                    }}
                     onClick={() => {
-                      setEdit(true);
+                      setEdit(false);
+                      setError({ message: "" });
                     }}
                   >
-                    Editar perfil
+                    Cancelar
                   </Button>
-                )}
-              </Center>
-            </Stack>
-          </FormControl>
-          {edit ? (
-            <>
-              <FormControl id="userName" isRequired>
-                <FormLabel>Nombre</FormLabel>
-                <Input
-                  placeholder="Nombre"
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  name="name"
-                  onChange={handleInputChange}
-                  value={formState.name}
-                />
-              </FormControl>
-              <FormControl id="email" isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  placeholder="nombre@ejemplo.com"
-                  _placeholder={{ color: "gray.500" }}
-                  type="email"
-                  name="email"
-                  onChange={handleInputChange}
-                  value={formState.email}
-                />
-              </FormControl>
-              <FormControl id="password" isRequired>
-                <FormLabel>Contraseña</FormLabel>
-                <Input
-                  _placeholder={{ color: "gray.500" }}
-                  type="password"
-                  name="password"
-                  onChange={handleInputChange}
-                  value={formState.password}
-                />
-              </FormControl>
-              <FormControl id="passwordRepeat" isRequired>
-                <FormLabel>Repite tu contraseña</FormLabel>
-                <Input
-                  _placeholder={{ color: "gray.500" }}
-                  type="password"
-                  name="passwordRepeat"
-                  onChange={handleInputChange}
-                  value={formState.passwordRepeat}
-                />
-              </FormControl>
-              <Stack spacing={6} direction={["column", "row"]}>
-                <Button
-                  bg={"red.400"}
-                  color={"white"}
-                  w="full"
-                  _hover={{
-                    bg: "red.500",
-                  }}
-                  onClick={() => {
-                    setEdit(false);
-                    setError({ message: "" });
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  onClick={handleSubmit}
-                  bg={"blue.400"}
-                  color={"white"}
-                  w="full"
-                  _hover={{
-                    bg: "blue.500",
-                  }}
-                >
-                  Actualizar
-                </Button>
-              </Stack>
-              <Text color="red">{error.message}</Text>
-            </>
-          ) : (
-            <>
-              <Box p={6}>
-                <Stack spacing={0} align={"center"} mb={5}>
-                  <Heading
-                    fontSize={"2xl"}
-                    fontWeight={500}
-                    fontFamily={"body"}
+                  <Button
+                    onClick={handleSubmit}
+                    bg={"blue.400"}
+                    color={"white"}
+                    w="full"
+                    _hover={{
+                      bg: "blue.500",
+                    }}
                   >
-                    {user ? user.name : <Loading />}
-                  </Heading>
-                  <Text color="red">{error.message}</Text>
-                  <Text color={"gray.500"}>{user && user.email}</Text>
+                    Actualizar
+                  </Button>
                 </Stack>
+                <Text color="red">{error.message}</Text>
+              </>
+            ) : (
+              <>
+                <Box p={6}>
+                  <Stack spacing={0} align={"center"} mb={5}>
+                    <Heading
+                      fontSize={"2xl"}
+                      fontWeight={500}
+                      fontFamily={"body"}
+                    >
+                      {user ? user.name : <Loading />}
+                    </Heading>
+                    <Text color="red">{error.message}</Text>
+                    <Text color={"gray.500"}>{user && user.email}</Text>
+                  </Stack>
 
-                <Stack direction={"row"} justify={"center"} spacing={6}>
-                  <Stack spacing={0} align={"center"}>
-                    <Text fontWeight={600}>0</Text>
-                    <Text fontSize={"sm"} color={"gray.500"}>
-                      Seguidores
-                    </Text>
+                  <Stack direction={"row"} justify={"center"} spacing={6}>
+                    <Stack spacing={0} align={"center"}>
+                      <Text fontWeight={600}>0</Text>
+                      <Text fontSize={"sm"} color={"gray.500"}>
+                        Seguidores
+                      </Text>
+                    </Stack>
+                    <Stack spacing={0} align={"center"}>
+                      <Text fontWeight={600}>0</Text>
+                      <Text fontSize={"sm"} color={"gray.500"}>
+                        Seguidos
+                      </Text>
+                    </Stack>
                   </Stack>
-                  <Stack spacing={0} align={"center"}>
-                    <Text fontWeight={600}>0</Text>
-                    <Text fontSize={"sm"} color={"gray.500"}>
-                      Seguidos
-                    </Text>
-                  </Stack>
-                </Stack>
-              </Box>
-            </>
-          )}
-        </Stack>
-      </Flex>
+                </Box>
+              </>
+            )}
+            <Heading fontSize={"xl"}>Libros leidos</Heading>
+            <UnorderedList>
+              {user.user_books
+                .filter((book) => book.user_status === "finished")
+                .map((book, index) => {
+                  return (
+                    <ListItem key={index}>
+                      <Link href={`/books/details/${book.id}`}>
+                        {book.title}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+            </UnorderedList>
+            <Heading fontSize={"xl"}>Quiero leer</Heading>
+            <UnorderedList>
+              {user.user_books
+                .filter((book) => book.user_status === "wishlist")
+                .map((book, index) => {
+                  return (
+                    <ListItem key={index}>
+                      <Link href={`/books/details/${book.id}`}>
+                        {book.title}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+            </UnorderedList>
+          </Stack>
+        </Flex>
+      )}
     </>
   );
 };
