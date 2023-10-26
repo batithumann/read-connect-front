@@ -97,25 +97,25 @@ const BookCard = ({ book }) => {
           <Stack w="100%">
             <CardBody w="100%">
               <Heading size="md" w="100%">
-                <Flex w="100%" justifyContent="space-between">
-                  <Box>
+                <Box>
+                  <Text>
                     <Link href={`/books/details/${book.id}`}>{book.title}</Link>
-                    {book.categories.map((category, index) => {
-                      return (
-                        <Badge
-                          key={index}
-                          ml="2"
-                          variant="solid"
-                          colorScheme="purple"
-                        >
-                          <Link
-                            href={`/books/search?category=${category.name}`}
-                          >
-                            {category.name}
-                          </Link>
-                        </Badge>
-                      );
-                    })}
+                  </Text>
+                  {book.categories.map((category, index) => {
+                    return (
+                      <Badge
+                        key={index}
+                        ml="2"
+                        variant="solid"
+                        colorScheme="purple"
+                      >
+                        <Link href={`/books/search?category=${category.name}`}>
+                          {category.name}
+                        </Link>
+                      </Badge>
+                    );
+                  })}
+                  <Flex flexDirection={"column"}>
                     {book.authors.map((author, index) => {
                       return (
                         <Link
@@ -132,7 +132,7 @@ const BookCard = ({ book }) => {
                         </Link>
                       );
                     })}
-                  </Box>
+                  </Flex>
                   <Flex
                     flexDirection="column"
                     textAlign="right"
@@ -157,7 +157,7 @@ const BookCard = ({ book }) => {
                     </Text>
                     <Text>{book.page_count} páginas</Text>
                   </Flex>
-                </Flex>
+                </Box>
               </Heading>
 
               <Text py="2">{book.short_description}</Text>
