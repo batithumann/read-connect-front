@@ -165,10 +165,7 @@ const Navigation = () => {
                         <>
                           <MenuDivider />
                           <MenuItem onClick={() => navigate("/profile")}>
-                            Mis datos
-                          </MenuItem>
-                          <MenuItem onClick={() => navigate("/my_books")}>
-                            Mis Libros
+                            Mi perfil
                           </MenuItem>
                           <MenuDivider />
                           <MenuItem onClick={logout}>Salir</MenuItem>
