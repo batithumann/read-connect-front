@@ -99,3 +99,24 @@ export const signup = async (formState) => {
     throw error;
   }
 };
+
+export const isValidEmail = (email) => {
+  return /\S+@\S+\.\S+/.test(email);
+};
+
+export const updateUser = async (token, formState) => {
+  try {
+    const urlServer = process.env.REACT_APP_BACKEND_URL;
+    const endpoint = "/update";
+    const credentials = {
+      name: formState.name,
+      email: formState.email,
+      password: formState.password,
+    };
+    await axios.put(urlServer + endpoint, credentials, {
+      headers: { Authorization: "Bearer " + token },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
