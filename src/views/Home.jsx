@@ -8,8 +8,11 @@ import {
   VStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       w={"full"}
@@ -33,8 +36,7 @@ const Home = () => {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
           >
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-            eiusmod tempor
+            Bienvenido a ReadConnect
           </Text>
           <Stack direction={"row"}>
             <Button
@@ -42,16 +44,27 @@ const Home = () => {
               rounded={"full"}
               color={"white"}
               _hover={{ bg: "blue.500" }}
+              onClick={() => navigate("/books")}
             >
-              Show me more
+              Ver todos los libros
             </Button>
             <Button
-              bg={"whiteAlpha.300"}
+              bg={"blue.400"}
               rounded={"full"}
               color={"white"}
-              _hover={{ bg: "whiteAlpha.500" }}
+              _hover={{ bg: "blue.500" }}
+              onClick={() => navigate("/search")}
             >
-              Show me more
+              Buscar libros
+            </Button>
+            <Button
+              bg={"blue.400"}
+              rounded={"full"}
+              color={"white"}
+              _hover={{ bg: "blue.500" }}
+              onClick={() => navigate("/community")}
+            >
+              Comunidad
             </Button>
           </Stack>
         </Stack>
