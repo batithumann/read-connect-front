@@ -110,7 +110,7 @@ const Navigation = () => {
             </HStack>
 
             <Flex alignItems={"center"}>
-              <HStack spacing={0}>
+              <HStack spacing={2}>
                 <InputGroup display={{ base: "none", md: "flex" }}>
                   <Input
                     onKeyDown={(e) => {

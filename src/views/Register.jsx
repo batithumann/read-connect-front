@@ -18,7 +18,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { signup } from "../utils";
+import { signup, isValidEmail } from "../utils";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -39,10 +39,6 @@ const Register = () => {
       [name]: value,
     });
   };
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
 
   const handleSignup = async () => {
     if (formState.password !== formState.passwordRepeat) {
@@ -69,24 +65,6 @@ const Register = () => {
       console.log(error);
       setError(error.response.data);
     }
-    // const urlServer = process.env.REACT_APP_BACKEND_URL;
-    // const endpoint = "/signup";
-
-    // const credentials = {
-    //   name: formState.name,
-    //   email: formState.email,
-    //   password: formState.password,
-    // };
-    // await axios
-    //   .post(urlServer + endpoint, credentials)
-    //   .then((res) => {})
-    //   .catch((error) => {
-    //     setError(error.response.data);
-    //     return;
-    //   })
-    //   .finally(() => {
-    //     navigate("/login");
-    //   });
   };
 
   return (
