@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Stack,
   Flex,
   Button,
@@ -38,35 +39,37 @@ const Home = () => {
           >
             Bienvenido a ReadConnect
           </Text>
-          <Stack direction={"row"}>
-            <Button
-              bg={"blue.400"}
-              rounded={"full"}
-              color={"white"}
-              _hover={{ bg: "blue.500" }}
-              onClick={() => navigate("/books")}
-            >
-              Ver todos los libros
-            </Button>
-            <Button
-              bg={"blue.400"}
-              rounded={"full"}
-              color={"white"}
-              _hover={{ bg: "blue.500" }}
-              onClick={() => navigate("/search")}
-            >
-              Buscar libros
-            </Button>
-            <Button
-              bg={"blue.400"}
-              rounded={"full"}
-              color={"white"}
-              _hover={{ bg: "blue.500" }}
-              onClick={() => navigate("/community")}
-            >
-              Comunidad
-            </Button>
-          </Stack>
+          <Box margin="auto">
+            <Stack direction={["column", "row"]}>
+              <Button
+                bg={"blue.400"}
+                rounded={"full"}
+                color={"white"}
+                _hover={{ bg: "blue.500" }}
+                onClick={() => navigate("/books")}
+              >
+                Ver todos los libros
+              </Button>
+              <Button
+                bg={"blue.400"}
+                rounded={"full"}
+                color={"white"}
+                _hover={{ bg: "blue.500" }}
+                onClick={() => navigate("/search")}
+              >
+                Buscar libros
+              </Button>
+              <Button
+                bg={"blue.400"}
+                rounded={"full"}
+                color={"white"}
+                _hover={{ bg: "blue.500" }}
+                onClick={() => navigate("/community")}
+              >
+                Comunidad
+              </Button>
+            </Stack>
+          </Box>
         </Stack>
       </VStack>
     </Flex>
