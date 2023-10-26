@@ -108,13 +108,17 @@ const BookCard = ({ book }) => {
                           variant="solid"
                           colorScheme="purple"
                         >
-                          {category.name}
+                          <Link
+                            href={`/books/search?category=${category.name}`}
+                          >
+                            {category.name}
+                          </Link>
                         </Badge>
                       );
                     })}
                     {book.authors.map((author, index) => {
                       return (
-                        <Box
+                        <Link
                           key={index}
                           color="gray.500"
                           fontWeight="semibold"
@@ -122,9 +126,10 @@ const BookCard = ({ book }) => {
                           fontSize="xs"
                           textTransform="uppercase"
                           ml="2"
+                          href={`/books/search?author=${author.name}`}
                         >
                           {author.name}
-                        </Box>
+                        </Link>
                       );
                     })}
                   </Box>

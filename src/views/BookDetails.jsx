@@ -9,14 +9,11 @@ import {
   Image,
   Flex,
   VStack,
-  Button,
   Heading,
   SimpleGrid,
   StackDivider,
-  List,
-  ListItem,
+  Link,
 } from "@chakra-ui/react";
-import { MdLocalShipping } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getBookDetailsById } from "../utils";
@@ -76,17 +73,45 @@ const BookDetails = () => {
                       variant="solid"
                       colorScheme="purple"
                     >
-                      {category.name}
+                      <Link href={`/books/search?category=${category.name}`}>
+                        {category.name}
+                      </Link>
                     </Badge>
                   );
                 })}
                 {book.authors.map((author, index) => {
                   return (
                     <Text key={index} fontWeight={300} fontSize={"2xl"}>
-                      {author.name}
+                      <Link href={`/books/search?author=${author.name}`}>
+                        {author.name}
+                      </Link>
                     </Text>
                   );
                 })}
+                <Flex
+                  flexDirection="column"
+                  textAlign="left"
+                  minW="90px"
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="xs"
+                  textTransform="uppercase"
+                >
+                  <Text>
+                    {book.published_date &&
+                      "Fecha de publicación: " +
+                        new Date(book.published_date).toLocaleDateString(
+                          "es-ES",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          }
+                        )}
+                  </Text>
+                  <Text>{book.page_count} páginas</Text>
+                </Flex>
               </Box>
 
               <Stack
@@ -97,86 +122,6 @@ const BookDetails = () => {
                 <VStack spacing={{ base: 4, sm: 6 }}>
                   <Text fontSize={"lg"}>{book.long_description}</Text>
                 </VStack>
-                <Box>
-                  <Text
-                    fontSize={{ base: "16px", lg: "18px" }}
-                    fontWeight={"500"}
-                    textTransform={"uppercase"}
-                    mb={"4"}
-                  >
-                    Product Details
-                  </Text>
-
-                  <List spacing={2}>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Between lugs:
-                      </Text>{" "}
-                      20 mm
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Bracelet:
-                      </Text>{" "}
-                      leather strap
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Case:
-                      </Text>{" "}
-                      Steel
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Case diameter:
-                      </Text>{" "}
-                      42 mm
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Dial color:
-                      </Text>{" "}
-                      Black
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Crystal:
-                      </Text>{" "}
-                      Domed, scratch‑resistant sapphire crystal with
-                      anti‑reflective treatment inside
-                    </ListItem>
-                    <ListItem>
-                      <Text as={"span"} fontWeight={"bold"}>
-                        Water resistance:
-                      </Text>{" "}
-                      5 bar (50 metres / 167 feet){" "}
-                    </ListItem>
-                  </List>
-                </Box>
-              </Stack>
-
-              <Button
-                rounded={"none"}
-                w={"full"}
-                mt={8}
-                size={"lg"}
-                py={"7"}
-                textTransform={"uppercase"}
-                _hover={{
-                  transform: "translateY(2px)",
-                  boxShadow: "lg",
-                }}
-              >
-                Add to cart
-              </Button>
-
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent={"center"}
-              >
-                <MdLocalShipping />
-                <Text>2-3 business days delivery</Text>
               </Stack>
             </Stack>
           </SimpleGrid>
